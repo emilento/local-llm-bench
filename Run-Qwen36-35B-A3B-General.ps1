@@ -1,0 +1,26 @@
+<#
+.SYNOPSIS
+    Convenience wrapper for Qwen3.6-35B-A3B general tasks.
+#>
+
+[CmdletBinding()]
+param(
+    [Parameter()]
+    [int]$ContextSize = 8192
+)
+
+$Runner = Join-Path $PSScriptRoot "Run-LlamaCppServer.ps1"
+if (!(Test-Path $Runner)) {
+    throw "Runner script not found: $Runner"
+}
+
+& $Runner `
+    -Model "unsloth/Qwen3.6-35B-A3B-GGUF/Qwen3.6-35B-A3B-UD-Q8_K_XL.gguf" `
+    -MmProj "unsloth/Qwen3.6-35B-A3B-GGUF/mmproj-BF16.gguf" `
+    -Alias "unsloth/Qwen3.6-35B-A3B-GGUF-General" `
+    -ContextSize $ContextSize `
+    -Temperature 1.0 `
+    -TopP 0.95 `
+    -TopK 20 `
+    -PresencePenalty 1.5 `
+    -MinP 0.00
