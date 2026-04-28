@@ -5,7 +5,7 @@
 
 $ErrorActionPreference = "Stop"
 
-$BaseFolder = "C:\AI\llama.cpp"
+$BaseFolder = "C:\AI\bin\llamacpp"
 
 $Sources = @(
     @{ 

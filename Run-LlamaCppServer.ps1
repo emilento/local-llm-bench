@@ -37,7 +37,7 @@ param(
     [string]$ModelsPath = "C:\AI\models",
 
     [Parameter()]
-    [string]$LlamaBaseFolder = "C:\AI\llama.cpp",
+    [string]$LlamaBaseFolder = "C:\AI\bin\llamacpp",
 
     [Parameter()]
     [int]$ContextSize = 8192,

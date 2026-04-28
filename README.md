@@ -26,7 +26,7 @@ Three backends are downloaded automatically:
 .\Get-LlamaCpp.ps1
 ```
 
-Binaries are extracted to `C:\AI\llama.cpp\<backend>\<version>\`.  
+Binaries are extracted to `C:\AI\bin\llamacpp\<backend>\<version>\`.  
 The runner scripts always pick the **latest build** automatically.
 
 ---
@@ -171,10 +171,15 @@ C:\AI\
 ├── Get-ModelFromHuggingFace.ps1      # Download models from Hugging Face
 ├── Run-LlamaCppServer.ps1            # Generic model runner
 ├── Run-<ModelName>.ps1               # Per-model convenience wrappers
-├── llama.cpp\
-│   ├── rocm-stable\<build>\
-│   ├── rocm-preview\<build>\
-│   └── vulkan\<build>\
+├── bin\
+│   ├── llamacpp\                     # GPU LLMs, embedding, and reranking
+│   │   ├── rocm-stable\<build>\
+│   │   ├── rocm-preview\<build>\
+│   │   └── vulkan\<build>\
+│   ├── ryzenai-server\               # NPU LLMs
+│   ├── flm\                          # NPU LLMs, embedding, and ASR
+│   ├── sdpp\                         # GPU image generation
+│   └── whispercpp\                   # NPU and GPU ASR
 └── models\
     └── <repo>\
         └── <model-name>\
