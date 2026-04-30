@@ -7,10 +7,7 @@
     or a specific build with -Version.
 
 .EXAMPLE
-    .\Run-LlamaCpp.ps1 -TaskProfile general
-
-.EXAMPLE
-    .\Run-LlamaCpp.ps1 -TaskProfile coding -Backend vulkan -Version b8893
+    .\Run-LlamaCpp.ps1 -Backend vulkan 
 #>
 
 [CmdletBinding()]
@@ -18,9 +15,6 @@ param(
     [Parameter()]
     [ValidateSet("rocm-stable", "rocm-preview", "vulkan")]
     [string]$Backend = "rocm-stable",
-
-    [Parameter()]
-    [string]$Version,
 
     [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
@@ -34,10 +28,10 @@ param(
     [string]$MmProj,
 
     [Parameter()]
-    [string]$ModelsPath = "C:\AI\models",
+    [string]$ModelsPath = "C:\Users\emilento\.cache\huggingface\hub",
 
     [Parameter()]
-    [string]$LlamaBaseFolder = "C:\AI\bin\llamacpp",
+    [string]$LlamaBaseFolder = "C:\Users\emilento\.cache\lemonade\bin\llamacpp\",
 
     [Parameter()]
     [int]$ContextSize = 8192,
@@ -63,58 +57,12 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-function Get-BuildFolder {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$BackendFolder,
-
-        [Parameter()]
-        [string]$RequestedVersion
-    )
-
-    if (!(Test-Path $BackendFolder)) {
-        throw "Backend folder not found: $BackendFolder"
-    }
-
-    if ($RequestedVersion) {
-        $RequestedPath = Join-Path $BackendFolder $RequestedVersion
-        if (!(Test-Path $RequestedPath)) {
-            throw "Requested version '$RequestedVersion' not found in '$BackendFolder'."
-        }
-        return (Get-Item $RequestedPath)
-    }
-
-    $Builds = Get-ChildItem -Path $BackendFolder -Directory
-    if (-not $Builds) {
-        throw "No build folders found in '$BackendFolder'."
-    }
-
-    $VersionedBuilds = $Builds | ForEach-Object {
-        $Match = [regex]::Match($_.Name, '^b(\d+)$')
-        if ($Match.Success) {
-            [PSCustomObject]@{
-                Item    = $_
-                Numeric = [int]$Match.Groups[1].Value
-            }
-        }
-    } | Where-Object { $null -ne $_ }
-
-    if ($VersionedBuilds) {
-        return ($VersionedBuilds | Sort-Object Numeric -Descending | Select-Object -First 1).Item
-    }
-
-    return $Builds | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-}
-
 $BackendFolder = Join-Path $LlamaBaseFolder $Backend
-$BuildFolder = Get-BuildFolder -BackendFolder $BackendFolder -RequestedVersion $Version
-$LlamaServer = Join-Path $BuildFolder.FullName "llama-server.exe"
+$LlamaServer = Join-Path $BackendFolder "llama-server.exe"
 
 if (!(Test-Path $LlamaServer)) {
-    throw "llama-server.exe not found in '$($BuildFolder.FullName)'."
+    throw "llama-server.exe not found in '$BackendFolder'."
 }
-
-$env:HF_HOME = $ModelsPath
 
 $LlamaServerArgs = @(
     "--model", (Join-Path $ModelsPath $Model),
@@ -144,15 +92,14 @@ if ($null -ne $Seed) {
     $LlamaServerArgs += @("--seed", $Seed)
 }
 
-$LlamaServerArgs += @("-ngl", 99, "-fa", 1, "--jinja", "--no-mmap")
+$LlamaServerArgs += @("-ngl", 999, "-fa", 1, "--jinja", "--no-mmap")
 
 Write-Host "[INFO] Backend:  $Backend" -ForegroundColor Cyan
-Write-Host "[INFO] Version:  $($BuildFolder.Name)" -ForegroundColor Cyan
 Write-Host "[INFO] Binary:   $LlamaServer" -ForegroundColor Gray
 Write-Host "[INFO] Args:     $($LlamaServerArgs -join ' ')" -ForegroundColor Gray
 Write-Host ""
 
-Push-Location $BuildFolder.FullName
+Push-Location $BackendFolder
 
 try {
     & $LlamaServer @LlamaServerArgs

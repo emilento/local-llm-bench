@@ -14,9 +14,11 @@ if (!(Test-Path $Runner)) {
     throw "Runner script not found: $Runner"
 }
 
+$BasePath = "models--unsloth--Qwen3.6-35B-A3B-GGUF/snapshots/a483e9e6cbd595906af30beda3187c2663a1118c"
+
 & $Runner `
-    -Model "unsloth/Qwen3.6-35B-A3B-GGUF/Qwen3.6-35B-A3B-UD-Q8_K_XL.gguf," `
-    -MmProj "unsloth/Qwen3.6-35B-A3B-GGUF/mmproj-BF16.gguf" `
+    -Model (Join-Path $BasePath "Qwen3.6-35B-A3B-UD-Q8_K_XL.gguf") `
+    -MmProj (Join-Path $BasePath "mmproj-BF16.gguf") `
     -Alias "unsloth/Qwen3.6-35B-A3B-GGUF-Coding" `
     -ContextSize $ContextSize `
     -Temperature 0.6 `

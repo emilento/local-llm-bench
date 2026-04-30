@@ -15,10 +15,11 @@ if (!(Test-Path $Runner)) {
 }
 
 & $Runner `
-    -Model "unsloth/Qwen3-Coder-Next-GGUF/Qwen3-Coder-Next-UD-Q4_K_XL.gguf" `
+    -Model "models--unsloth--Qwen3-Coder-Next-GGUF/snapshots/ce09c67b53bc8739eef83fe67b2f5d293c270632/UD-Q8_K_XL/Qwen3-Coder-Next-UD-Q8_K_XL-00001-of-00003.gguf" `
     -Alias "unsloth/Qwen3-Coder-Next-GGUF" `
     -ContextSize $ContextSize `
     -Temperature 1.0 `
     -TopP 0.95 `
     -TopK 40 `
-    -MinP 0.01
+    -MinP 0.01 `
+    -Backend "vulkan"

@@ -15,7 +15,7 @@ if (!(Test-Path $Runner)) {
 }
 
 & $Runner `
-    -Model "unsloth/gpt-oss-20b-GGUF/gpt-oss-20b-UD-Q8_K_XL.gguf" `
+    -Model "models--unsloth--gpt-oss-20b-GGUF/snapshots/d449b42d93e1c2c7bda5312f5c25c8fb91dfa9b4/gpt-oss-20b-UD-Q8_K_XL.gguf" `
     -Alias "unsloth/gpt-oss-20b-GGUF" `
     -ContextSize $ContextSize `
     -Temperature 1.0 `

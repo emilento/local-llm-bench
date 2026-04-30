@@ -15,7 +15,7 @@ if (!(Test-Path $Runner)) {
 }
 
 & $Runner `
-    -Model "unsloth/GLM-4.7-Flash-GGUF/GLM-4.7-Flash-UD-Q8_K_XL.gguf" `
+    -Model "models--unsloth--GLM-4.7-Flash-GGUF/snapshots/0d32489ecb9db6d2a4fc93bd27ef01519f95474d/GLM-4.7-Flash-UD-Q8_K_XL.gguf" `
     -Alias "unsloth/GLM-4.7-Flash-GGUF" `
     -ContextSize $ContextSize `
     -Seed 3407 `

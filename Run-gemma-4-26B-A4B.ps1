@@ -14,9 +14,11 @@ if (!(Test-Path $Runner)) {
     throw "Runner script not found: $Runner"
 }
 
+$BasePath = "models--unsloth--gemma-4-26B-A4B-it-GGUF/snapshots/b68961b3c96e42475123a39fe3f8aa149163cf8b"
+
 & $Runner `
-    -Model "unsloth/gemma-4-26B-A4B-it-GGUF/gemma-4-26B-A4B-it-UD-Q8_K_XL.gguf" `
-    -MmProj "unsloth/gemma-4-26B-A4B-it-GGUF/mmproj-BF16.gguf" `
+    -Model (Join-Path $BasePath "gemma-4-26B-A4B-it-UD-Q8_K_XL.gguf") `
+    -MmProj (Join-Path $BasePath "mmproj-BF16.gguf") `
     -Alias "unsloth/gemma-4-26B-A4B-it-GGUF" `
     -ContextSize $ContextSize `
     -Temperature 1.0 `

@@ -110,15 +110,16 @@ The script supports **resuming interrupted downloads** and shows download progre
 
 Each script launches `llama-server` with tuned parameters for that model:
 
-| Script                            | Model                   | Notes           |
-| --------------------------------- | ----------------------- | --------------- |
-| `Run-Gemma4-26B-A4B.ps1`          | Gemma 4 26B A4B         | —               |
-| `Run-GLM-4.7-Flash.ps1`           | GLM-4.7 Flash           | —               |
-| `Run-gpt-oss-20b.ps1`             | GPT-OSS 20B             | —               |
-| `Run-Nemotron-3-Nano-30B-A3B.ps1` | Nemotron-3 Nano 30B A3B | —               |
-| `Run-Qwen3-Coder-Next.ps1`        | Qwen3-Coder-Next        | Coding          |
-| `Run-Qwen36-35B-A3B-Coding.ps1`   | Qwen3.6-35B-A3B         | Coding profile  |
-| `Run-Qwen36-35B-A3B-General.ps1`  | Qwen3.6-35B-A3B         | General profile |
+| Script                            | Model                   | Notes   |
+| --------------------------------- | ----------------------- | ------- |
+| `Run-gemma-4-26B-A4B.ps1`         | Gemma 4 26B A4B         | —       |
+| `Run-gemma-4-31B.ps1`             | Gemma 4 26B A4B         | —       |
+| `Run-GLM-4.7-Flash.ps1`           | GLM-4.7 Flash           | —       |
+| `Run-gpt-oss-20b.ps1`             | GPT-OSS 20B             | —       |
+| `Run-Nemotron-3-Nano-30B-A3B.ps1` | Nemotron-3 Nano 30B A3B | —       |
+| `Run-Qwen3-Coder-Next.ps1`        | Qwen3-Coder-Next        | Coding  |
+| `Run-Qwen36-35B-A3B-Coding.ps1`   | Qwen3.6-35B-A3B         | Coding  |
+| `Run-Qwen36-35B-A3B-General.ps1`  | Qwen3.6-35B-A3B         | General |
 
 All wrappers accept an optional `-ContextSize` parameter (default varies per model):
 
@@ -176,10 +177,6 @@ C:\AI\
 │   │   ├── rocm-stable\<build>\
 │   │   ├── rocm-preview\<build>\
 │   │   └── vulkan\<build>\
-│   ├── ryzenai-server\               # NPU LLMs
-│   ├── flm\                          # NPU LLMs, embedding, and ASR
-│   ├── sdpp\                         # GPU image generation
-│   └── whispercpp\                   # NPU and GPU ASR
 └── models\
     └── <repo>\
         └── <model-name>\

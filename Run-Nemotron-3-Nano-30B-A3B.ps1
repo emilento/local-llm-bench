@@ -15,7 +15,7 @@ if (!(Test-Path $Runner)) {
 }
 
 & $Runner `
-    -Model "unsloth/Nemotron-3-Nano-30B-A3B-GGUF/Nemotron-3-Nano-30B-A3B-UD-Q8_K_XL.gguf" `
+    -Model "models--unsloth--Nemotron-3-Nano-30B-A3B-GGUF/snapshots/9ad8b366c308f931b2a96b9306f0b41aef9cd405/Nemotron-3-Nano-30B-A3B-UD-Q8_K_XL.gguf" `
     -Alias "unsloth/Nemotron-3-Nano-30B-A3B-GGUF" `
     -ContextSize $ContextSize `
     -Seed 3407 `
