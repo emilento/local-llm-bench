@@ -21,5 +21,4 @@ if (!(Test-Path $Runner)) {
     -Temperature 1.0 `
     -TopP 0.95 `
     -TopK 40 `
-    -MinP 0.01 `
-    -Backend "vulkan"
+    -MinP 0.01
