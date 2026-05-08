@@ -101,7 +101,9 @@ function Get-FromRepoAndInstall {
             $ZipFile = Join-Path $BaseFolder "$($Asset.name)"
             
             # 3. Cleanup zip file
-            Remove-Item -Path $ZipFile -Force
+            if (Test-Path $ZipFile) {
+                Remove-Item -Path $ZipFile -Force
+            }
            
             # 4. Download
             Write-Host "[+] Found: $($Asset.name) (version: $VersionRaw). Downloading..." -ForegroundColor Green
