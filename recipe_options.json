@@ -20,13 +20,8 @@
     "llamacpp_backend": "rocm"
   },
   "Qwen3-Coder-Next-GGUF": {
-    "ctx_size": 32768,
+    "ctx_size": 128000,
     "llamacpp_args": "--temp 1.0 --top-p 0.95 --top-k 40 --min-p 0.01",
-    "llamacpp_backend": "rocm"
-  },
-  "Qwen3.5-35B-A3B-GGUF": {
-    "ctx_size": 32768,
-    "llamacpp_args": "--temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.00 --presence-penalty 0.0",
     "llamacpp_backend": "rocm"
   },
   "Qwen3.6-35B-A3B-GGUF": {

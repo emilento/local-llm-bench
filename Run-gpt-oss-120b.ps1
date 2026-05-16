@@ -15,7 +15,7 @@ if (!(Test-Path $Runner)) {
 }
 
 & $Runner `
-    -Model "models--ggml-org--gpt-oss-120b-GGUF/snapshots/d449b42d93e1c2c7bda5312f5c25c8fb91dfa9b4/gpt-oss-20b-UD-Q8_K_XL.gguf" `
+    -Model "models--ggml-org--gpt-oss-120b-GGUF/snapshots/d932fcea62f83e088d8f076a2cd2d7eb02dfa682/gpt-oss-120b-mxfp4-00001-of-00003.gguf" `
     -Alias "ggml-org/gpt-oss-120b-GGUF" `
     -ContextSize $ContextSize `
     -Temperature 1.0 `
